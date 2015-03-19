@@ -11,6 +11,10 @@ http://www.mail-archive.com/webpy@googlegroups.com/msg02800.html
 
 下面的代码基于lighttpd 1.4.18，更高版本也可以工作
 
+## 安装
+* lighttpd（默认包含fastcgi）
+* python-flup
+
 ##Note:  
 * 你可以重命名 <code>code.py</code>为任何你自己愿意的名字，该例子还是以code.py为例。
 * <code>/path-to/webpy-app</code> 为包含你的 <code>code.py</code>代码的路径。
@@ -19,6 +23,7 @@ http://www.mail-archive.com/webpy@googlegroups.com/msg02800.html
 如果你还不确定你的lighttpd版本的话，你可以在命令行中使用<code>lighttpd -v</vode>查看相应的版本信息。
 
 Note: 较早版本的lighttpd可能会按照不同的方式组织.conf文件，但是它们应该遵循的是相同的原则。
+
 
 ###ligghttpd 在 Debian GNU/Linux 下的配置文件
 
@@ -45,7 +50,17 @@ Enabling and disabling modules could be done by provided
 </pre>
 
 <strong>
-对于web py， 你需要允许 mod_fastcgi 模块和 mod_rewrite模块, 运行: <code>/usr/sbin/lighty-enable-mod</code> 启用 <code>fastcgi</code> （Mac OS X可能不需要）  
+对于web py， 你需要启用 mod_fastcgi, 运行: <code>/usr/sbin/lighty-enable-mod</code> 启用 <code>fastcgi</code> （Mac OS X可能不需要,mode）  
+#######启用fastcgi示例：
+```sh
+ubuntu:$ sudo /usr/sbin/lighty-enable-mod 
+Disabled modules: accesslog auth cgi debian-doc dir-listing evasive evhost expire extforward fastcgi fastcgi-php flv-streaming no-www proxy rrdtool simple-vhost ssi ssl status userdir usertrack 
+Enabled modules: 
+Enable module: fastcgi
+Enabling fastcgi: ok
+Run /etc/init.d/lighttpd force-reload to enable changes
+
+```
 (mod_rewrite 模块可能需要启用 <code>10-fastcgi.conf</code>文件).
 
 ##下面是文件的基本结构（Mac OS X不同）:
